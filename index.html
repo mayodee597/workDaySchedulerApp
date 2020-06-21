@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="moment.js"></script>
+</head>
+
+<body onload="loadAll();">
+
+    <header class="jumbotron">
+      <strong><h1 class="display-3">Around-the-Clock Scheduler App</h1></strong>
+      <p class="lead">My 24-hour Calendar App vital for maximizing my working hours!</p>
+      <p id="currentDay" class="lead"></p>
+    </header>
+    <div class="container">
+
+<style>
+
+    html, body{
+        background: gray;
+        color: white;
+    }
+    input{
+        width:80vw;
+        height:10vh;
+        background-color: #aaaaff;
+    color: white;
+    }
+
+    .past {
+    background-color: #d3d3d3;
+    color: white;
+  }
+  
+  .present {
+    background-color: #ff6961;
+    color: white;
+  }
+  
+  
+  .future {
+    background-color: #77dd77;
+    color: white;
+  }
+   
+</style>
+
+
+<body onload="loadAll();">
+    
+
+
+<table>
+
+    <tr>
+        <td>12 AM</td><td><input type="text" name="12a" id="12am"></td><td><button onclick="saveData(this.name)" name="12am">+</button></td>
+    </tr>
+    <tr>
+        <td>1 AM</td><td><input type="text" name="1a" id="1am"></td><td><button onclick="saveData(this.name)" name="1am">+</button></td>
+    </tr>
+    <tr>
+        <td>2 AM</td><td><input type="text" name="2a" id="2am"></td><td><button onclick="saveData(this.name)" name="2am">+</button></td>
+    </tr>
+    <tr>
+        <td>3 AM</td><td><input type="text" name="3a" id="3am"></td><td><button onclick="saveData(this.name)" name="3am">+</button></td>
+    </tr>
+    <tr>
+        <td>4 AM</td><td><input type="text" name="4a" id="4am"></td><td><button onclick="saveData(this.name)" name="4am">+</button></td>
+    </tr>
+    <tr>
+        <td>5 AM</td><td><input type="text" name="5a" id="5am"></td><td><button onclick="saveData(this.name)" name="5am">+</button></td>
+    </tr>
+    <tr>
+        <td>6 AM</td><td><input type="text" name="6a" id="6am"></td><td><button onclick="saveData(this.name)" name="6am">+</button></td>
+    </tr>
+    <tr>
+        <td>7 AM</td><td><input type="text" name="7a" id="7am"></td><td><button onclick="saveData(this.name)" name="7am">+</button></td>
+    </tr>
+    <tr>
+        <td>8 AM</td><td><input type="text" name="8a" id="8am"></td><td><button onclick="saveData(this.name)" name="8am">+</button></td>
+    </tr>
+    <tr>
+        <td>9 AM</td><td><input type="text" name="9a" id="9am"></td><td><button onclick="saveData(this.name)" name="9am">+</button></td>
+    </tr>
+    <tr>
+        <td>10 AM</td><td><input type="text" name="10a" id="10am"></td><td><button onclick="saveData(this.name)" name="10am">+</button></td>
+    </tr>
+    <tr>
+        <td>11 AM</td><td><input type="text" name="11a" id="11am"></td><td><button onclick="saveData(this.name)" name="11am">+</button></td>
+    </tr> 
+    <tr>
+        <td>12 PM</td><td><input type="text" name="12p" id="12pm"></td><td><button onclick="saveData(this.name)" name="12pm">+</button></td>
+    </tr>
+    <tr>
+        <td>1 PM</td><td><input type="text" name="1p" id="1pm"></td><td><button onclick="saveData(this.name)" name="1pm">+</button></td>
+    </tr>
+    <tr>
+        <td>2 PM</td><td><input type="text" name="2p" id="2pm"></td><td><button onclick="saveData(this.name)" name="2pm">+</button></td>
+    </tr> <tr>
+        <td>3 PM</td><td><input type="text" name="3p" id="3pm"></td><td><button onclick="saveData(this.name)" name="3pm">+</button></td>
+    </tr>
+    <tr>
+        <td>4 PM</td><td><input type="text" name="4p" id="4pm"></td><td><button onclick="saveData(this.name)" name="4pm">+</button></td>
+    </tr>
+    <tr>
+        <td>5 PM</td><td><input type="text" name="2a" id="5pm"></td><td><button onclick="saveData(this.name)" name="5pm">+</button></td>
+    </tr> <tr>
+        <td>6 PM</td><td><input type="text" name="12a" id="6pm"></td><td><button onclick="saveData(this.name)" name="6pm">+</button></td>
+    </tr>
+    <tr>
+        <td>7 PM</td><td><input type="text" name="1a" id="7pm"></td><td><button onclick="saveData(this.name)" name="7pm">+</button></td>
+    </tr>
+    <tr>
+        <td>8 PM</td><td><input type="text" name="2a" id="8pm"></td><td><button onclick="saveData(this.name)" name="8pm">+</button></td>
+    </tr> <tr>
+        <td>9 PM</td><td><input type="text" name="12a" id="9pm"></td><td><button onclick="saveData(this.name)" name="9pm">+</button></td>
+    </tr>
+    <tr>
+        <td>10 PM</td><td><input type="text" name="1a" id="10pm"></td><td><button onclick="saveData(this.name)" name="10pm">+</button></td>
+    </tr>
+    <tr>
+        <td>11 PM</td><td><input type="text" name="2a" id="11pm"></td><td><button onclick="saveData(this.name)" name="11pm">+</button></td>
+    </tr>
+</table>
+
+
+<script>
+    function saveData(id){
+        // get the text from the input above
+        var data = document.getElementById(id).value;
+
+        // save the text as '12am', 'text'
+        localStorage.setItem(id, data);
+    }
+
+    function loadAll(){
+
+        // Retrieve
+        document.getElementById('12am').value = localStorage.getItem("12am");
+        document.getElementById('1am').value = localStorage.getItem("1am");
+        document.getElementById('2am').value = localStorage.getItem("2am");
+        document.getElementById('3am').value = localStorage.getItem("3am");
+        document.getElementById('4am').value = localStorage.getItem("4am");
+        document.getElementById('5am').value = localStorage.getItem("5am");
+        document.getElementById('6am').value = localStorage.getItem("6am");
+        document.getElementById('7am').value = localStorage.getItem("7am");
+        document.getElementById('8am').value = localStorage.getItem("8am");
+        document.getElementById('9am').value = localStorage.getItem("9am");
+        document.getElementById('10am').value = localStorage.getItem("10am");
+        document.getElementById('11am').value = localStorage.getItem("11am");
+        document.getElementById('12pm').value = localStorage.getItem("12pm");
+        document.getElementById('1pm').value = localStorage.getItem("1pm");
+        document.getElementById('2pm').value = localStorage.getItem("2pm");
+        document.getElementById('3pm').value = localStorage.getItem("3pm");
+        document.getElementById('4pm').value = localStorage.getItem("4pm");
+        document.getElementById('5pm').value = localStorage.getItem("5pm");
+        document.getElementById('6pm').value = localStorage.getItem("6pm");
+        document.getElementById('7pm').value = localStorage.getItem("7pm");
+        document.getElementById('8pm').value = localStorage.getItem("8pm");
+        document.getElementById('9pm').value = localStorage.getItem("9pm");
+        document.getElementById('10pm').value = localStorage.getItem("10pm");
+        document.getElementById('11pm').value = localStorage.getItem("11pm");
+        
+
+
+        var time = moment().format('LT');
+
+        if(time.includes('12:')){
+            if(time.includes('am')){
+                //alert('it is 12 am');
+                document.getElementById('12am').classList.add('present');
+                document.getElementById('12pm').classList.remove('present');
+
+            }else{
+               // alert('it is 12 pm');
+                document.getElementById('12pm').classList.add('present');
+                document.getElementById('12am').classList.remove('present');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        
+        if(time.includes('1:')){
+            if(time.includes('am')){
+                ////alert('it is 1 am');
+                document.getElementById('1am').classList.add('present');
+                document.getElementById('1pm').classList.remove('present');
+                document.getElementById('12am').classList.remove('present');
+                document.getElementById('12am').classList.add('past');
+                
+
+            }else{
+                //alert('it is 1 pm');
+                document.getElementById('1pm').classList.add('present');
+                document.getElementById('1am').classList.remove('present');
+                document.getElementById('12pm').classList.remove('present');
+                document.getElementById('12pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        
+        if(time.includes('2:')){
+            if(time.includes('am')){
+                //alert('it is 2 am');
+                document.getElementById('2am').classList.add('present');
+                document.getElementById('2pm').classList.remove('present');
+                document.getElementById('1am').classList.remove('present');
+                document.getElementById('1am').classList.add('past');
+
+            }else{
+                //alert('it is 2 pm');
+                document.getElementById('2pm').classList.add('present');
+                document.getElementById('2am').classList.remove('present');
+                document.getElementById('1pm').classList.remove('present');
+                document.getElementById('1pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+
+        if(time.includes('3:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('3am').classList.add('present');
+                document.getElementById('3pm').classList.remove('present');
+                document.getElementById('2am').classList.remove('present');
+                document.getElementById('2am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('3pm').classList.add('present');
+                document.getElementById('3am').classList.remove('present');
+                document.getElementById('2pm').classList.remove('present');
+                document.getElementById('2pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('4:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('4am').classList.add('present');
+                document.getElementById('4pm').classList.remove('present');
+                document.getElementById('3am').classList.remove('present');
+                document.getElementById('3am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('4pm').classList.add('present');
+                document.getElementById('4am').classList.remove('present');
+                document.getElementById('3pm').classList.remove('present');
+                document.getElementById('3pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('5:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('5am').classList.add('present');
+                document.getElementById('5pm').classList.remove('present');
+                document.getElementById('4am').classList.remove('present');
+                document.getElementById('4am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('5pm').classList.add('present');
+                document.getElementById('5am').classList.remove('present');
+                document.getElementById('4pm').classList.remove('present');
+                document.getElementById('4pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('6:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('6am').classList.add('present');
+                document.getElementById('6pm').classList.remove('present');
+                document.getElementById('5am').classList.remove('present');
+                document.getElementById('5am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('6pm').classList.add('present');
+                document.getElementById('6am').classList.remove('present');
+                document.getElementById('5pm').classList.remove('present');
+                document.getElementById('5pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('7:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('7am').classList.add('present');
+                document.getElementById('7pm').classList.remove('present');
+                document.getElementById('6am').classList.remove('present');
+                document.getElementById('6am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('7pm').classList.add('present');
+                document.getElementById('7am').classList.remove('present');
+                document.getElementById('6pm').classList.remove('present');
+                document.getElementById('6pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('8:')){
+            if(time.includes('am')){
+                //alert('i7 is 3 am');
+                document.getElementById('8am').classList.add('present');
+                document.getElementById('8pm').classList.remove('present');
+                document.getElementById('7am').classList.remove('present');
+                document.getElementById('7am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('8pm').classList.add('present');
+                document.getElementById('8am').classList.remove('present');
+                document.getElementById('7pm').classList.remove('present');
+                document.getElementById('7pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('9:')){
+            if(time.includes('am')){
+                //alert('i8 is 3 am');
+                document.getElementById('9am').classList.add('present');
+                document.getElementById('9pm').classList.remove('present');
+                document.getElementById('8am').classList.remove('present');
+                document.getElementById('8am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('9pm').classList.add('present');
+                document.getElementById('9am').classList.remove('present');
+                document.getElementById('8pm').classList.remove('present');
+                document.getElementById('8pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('10:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('10am').classList.add('present');
+                document.getElementById('10pm').classList.remove('present');
+                document.getElementById('9am').classList.remove('present');
+                document.getElementById('9am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('10pm').classList.add('present');
+                document.getElementById('10am').classList.remove('present');
+                document.getElementById('9pm').classList.remove('present');
+                document.getElementById('9pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+        if(time.includes('11:')){
+            if(time.includes('am')){
+                //alert('it is 3 am');
+                document.getElementById('11am').classList.add('present');
+                document.getElementById('11pm').classList.remove('present');
+                document.getElementById('10am').classList.remove('present');
+                document.getElementById('10am').classList.add('past');
+
+            }else{
+                //alert('it is 3 pm');
+                document.getElementById('11pm').classList.add('present');
+                document.getElementById('11am').classList.remove('present');
+                document.getElementById('10pm').classList.remove('present');
+                document.getElementById('10pm').classList.add('past');
+            }
+        }
+        //////////////////////////////////////////////////////////////
+
+    }
+</script>
+
+</body>
+</html>
